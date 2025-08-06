@@ -1,0 +1,26 @@
+import java.io.*;
+import java.nio.file.*;
+
+public class SimpleFileOperations {
+    public static void main(String[] args) throws IOException {
+        String fileName = "example.txt";
+
+        // 1. Write to file
+        Files.write(Paths.get(fileName), "Hello, Java!\nThis is a file.".getBytes());
+        System.out.println("File written.");
+
+        // 2. Read from file
+        System.out.println("\nFile content:");
+        Files.lines(Paths.get(fileName)).forEach(System.out::println);
+
+        // 3. Modify file: replace "Java" with "World"
+        String content = new String(Files.readAllBytes(Paths.get(fileName)));
+        content = content.replace("Java", "World");
+        Files.write(Paths.get(fileName), content.getBytes());
+        System.out.println("\nFile modified.");
+
+        // 4. Read modified file.
+        System.out.println("\nModified content:");
+        Files.lines(Paths.get(fileName)).forEach(System.out::println);
+    }
+}
